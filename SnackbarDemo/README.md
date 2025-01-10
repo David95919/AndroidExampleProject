@@ -97,3 +97,16 @@ Scaffold(
     snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
 ) 
 ```
+
+## 使用
+
+### 在Composable
+```kotlin
+val scope = rememberCoroutineScope()
+scope.launch { SnackbarController.sendEvent(SnackbarEvent("这是一条消息")) }
+```
+
+### 在ViewModel
+```kotlin
+viewModelScope.launch{ SnackbarController.sendEvent(SnackbarEvent("这是一条消息")) }
+```
