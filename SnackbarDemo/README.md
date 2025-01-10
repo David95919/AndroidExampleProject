@@ -1,46 +1,6 @@
 ## 全局SnackBar
 https://www.youtube.com/watch?v=KFazs62lIkE
 
-## 1.导入需要的依赖
-`libs.versions.toml`
-```toml
-[versions]
-#....
-navigationCompose = "2.8.5"
-kotlinSerialization = "1.7.1"
-
-
-[libraries]
-#....
-androidx-compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref= "navigationCompose"}
-kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerialization" }
-androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycleRuntimeKtx" }
-
-
-[plugins]
-#....
-jetbrains-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-```
-
-`build.gradle.kts`
-```kotlin
-plugins {
-    //...
-    alias(libs.plugins.jetbrains.kotlin.serialization)
-}
-
-android {
-    //...
-}
-
-dependencies {
-    //...
-    implementation(libs.androidx.compose.navigation)
-    implementation(libs.kotlinx.serialization.json)
-    implementation(libs.androidx.lifecycle.runtime.compose)
-}
-```
-
 ## 创建SnackbarController
 `SnackbarController.kt`
 
