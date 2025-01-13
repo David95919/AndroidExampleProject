@@ -99,9 +99,9 @@ fun MultiPhotoPickerSample(modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally, // 水平居中对齐
         verticalArrangement = Arrangement.Center // 垂直居中排列
     ) {
-        // 创建一个按钮，当用户点击时，启动媒体选择器
+        // 创建一个按钮，当用户点击时，启动媒体选择器,ImageAndVideo是图片与视频
         Button(onClick = { launcher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageAndVideo)) }) {
-            Text("选择多张图片") // 按钮上的文本
+            Text("选择多张图片与视频") // 按钮上的文本
         }
 
         // 使用 LazyColumn 显示用户选择的图片列表
