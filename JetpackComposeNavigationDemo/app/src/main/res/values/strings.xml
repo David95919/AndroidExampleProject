@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Jetpack Compose Navigation Demo</string>
+    <string name="shortcut_details_long_label">Open Details</string>
+    <string name="shortcut_details_short_label">Details</string>
 </resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="details"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:shortcutShortLabel="@string/shortcut_details_short_label"
+        android:shortcutLongLabel="@string/shortcut_details_long_label">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="navigationdemo://download_list/1,2,3,4,5" />
+    </shortcut>
+</shortcuts>

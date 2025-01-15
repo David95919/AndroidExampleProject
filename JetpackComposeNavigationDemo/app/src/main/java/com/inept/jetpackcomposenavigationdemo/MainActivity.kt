@@ -23,7 +23,7 @@ import androidx.navigation.compose.rememberNavController
 import com.inept.jetpackcomposenavigationdemo.ui.components.NavigationBottomRow
 import com.inept.jetpackcomposenavigationdemo.ui.content.ContentScreen
 import com.inept.jetpackcomposenavigationdemo.ui.download.DownloadScreen
-import com.inept.jetpackcomposenavigationdemo.ui.list.ListScreen
+import com.inept.jetpackcomposenavigationdemo.ui.downloadList.DownloadListScreen
 import com.inept.jetpackcomposenavigationdemo.ui.theme.JetpackComposeNavigationDemoTheme
 
 class MainActivity : ComponentActivity() {
@@ -45,6 +45,7 @@ class MainActivity : ComponentActivity() {
 @Preview
 @Composable
 fun NavigationApp(modifier: Modifier = Modifier) {
+    //路由控制器
     val navController = rememberNavController()
 
     //获取当前屏幕
@@ -53,13 +54,10 @@ fun NavigationApp(modifier: Modifier = Modifier) {
     var currentScreen =
         navigationDestinationsList.find { it.route == navDestination?.route } ?: Content
 
-    println(currentScreen)
-
     Column(modifier = modifier.fillMaxSize()) {
-
         Box(
             modifier = Modifier
-                .weight(1f)
+                .weight(1f) //占满剩下空间
                 .fillMaxWidth()
         ) {
             NavigationNavHost(navController)
@@ -83,17 +81,26 @@ fun NavigationNavHost(navController: NavHostController) {
         composable(route = Content.route) {
             ContentScreen()
         }
-
-        composable(route = Download.route) {
-            DownloadScreen()
+        composable(Download.route) {
+            DownloadScreen(onToDownloadList = {
+                navController.navigateToDownloadList(downloadList = "a,b,c,d,e,f")
+            })
         }
 
-        composable(route = List.route) {
-            ListScreen()
+        //DeepLink and Argument 深层链接和参数
+        composable(
+            route = DownloadList.routeWithArgs,
+            arguments = DownloadList.arguments,
+            deepLinks = DownloadList.deepLinks
+        ) { navBackStackEntry ->
+            val downloadList =
+                navBackStackEntry.arguments?.getString(DownloadList.downloadListArg)
+            DownloadListScreen(downloadList = downloadList)
         }
     }
 }
 
+//方便使用的拓展函数
 fun NavHostController.navigateSingleTopTo(route: String) {
     this.navigate(route = route) {
         popUpTo(id = this@navigateSingleTopTo.graph.findStartDestination().id) {
@@ -103,3 +110,9 @@ fun NavHostController.navigateSingleTopTo(route: String) {
         restoreState = true
     }
 }
+
+//方便使用的拓展函数
+private fun NavHostController.navigateToDownloadList(downloadList: String) {
+    this.navigateSingleTopTo("${DownloadList.route}/$downloadList")
+}
+

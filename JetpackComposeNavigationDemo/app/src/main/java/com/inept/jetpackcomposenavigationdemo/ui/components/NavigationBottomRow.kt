@@ -14,7 +14,7 @@ fun NavigationBottomRow(onSelected: (NavigationDestinations) -> Unit, currentScr
         navigationDestinationsList.forEach {
             NavigationBarItem(
                 icon = { Icon(contentDescription = null, imageVector = it.icon) },
-                label = { Text(it.route.capitalize()) },
+                label = { Text(it.route.replaceFirstChar { char -> char.uppercase() }) },
                 onClick = { onSelected(it) },
                 selected = currentScreen == it
             )

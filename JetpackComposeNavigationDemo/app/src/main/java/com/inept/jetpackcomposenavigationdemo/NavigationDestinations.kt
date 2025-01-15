@@ -5,6 +5,9 @@ import androidx.compose.material.icons.filled.Apps
 import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.filled.FormatListNumbered
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
+import androidx.navigation.navDeepLink
 
 interface NavigationDestinations {
     val icon: ImageVector
@@ -21,9 +24,17 @@ object Download : NavigationDestinations {
     override val route = "download"
 }
 
-object List : NavigationDestinations {
+object DownloadList : NavigationDestinations {
     override val icon = Icons.Filled.FormatListNumbered
-    override val route = "list"
+    override val route = "download_list"
+    const val downloadListArg = "download_list_string"
+    val routeWithArgs = "${route}/{${downloadListArg}}"
+    val arguments = listOf(
+        navArgument(downloadListArg) { type = NavType.StringType }
+    )
+    val deepLinks = listOf(
+        navDeepLink { uriPattern = "navigationdemo://$route/{$downloadListArg}"}
+    )
 }
 
-val navigationDestinationsList = listOf(Content, Download, List)
+val navigationDestinationsList = listOf(Content, Download)
